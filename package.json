@@ -4,8 +4,8 @@
   "description": "A toy app demonstrating tree shaking.",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development npx webpack --mode development",
-    "build": "NODE_ENV=production npx webpack --mode production",
+    "dev": "NODE_ENV=development npx webpack",
+    "build": "NODE_ENV=production npx webpack",
     "start": "node server.js"
   },
   "repository": {
@@ -39,7 +39,7 @@
     "preact": "^8.2.9",
     "preact-emotion": "^9.2.3",
     "preact-router": "^2.6.1",
-    "prop-types": "^15.6.1",
+    "prop-types": "^15.6.2",
     "regenerator-runtime": "^0.11.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.12.0",
@@ -53,7 +53,12 @@
       "env"
     ],
     "plugins": [
-      ["transform-react-jsx", {"pragma": "h"}],
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "h"
+        }
+      ],
       "emotion"
     ]
   },

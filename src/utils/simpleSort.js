@@ -1,4 +1,4 @@
-export const simpleSort = function(arr, key, order = "asc") {
+export default function(arr, key, order = "asc") {
   if (Array.isArray(arr) === true) {
     return arr.sort((a, b) => {
       if (order === "asc") {

@@ -1,53 +1,77 @@
-import { PedalHeading, BackLink, PedalName, PedalImageContainer, PedalImage, ToggleFavorite, PedalInfo, PedalCopy, PedalInfoHeading, PedalVideo } from "./PedalDetail.css";
+import regeneratorRuntime from "regenerator-runtime";
+import Heading from "../Heading/Heading";
+import BackLink from "../BackLink/BackLink";
+import PedalImage from "../PedalImage/PedalImage";
+import { PedalImageContainer, ToggleFavorite, PedalInfo } from "./PedalDetail.css";
 import { h, render, Component } from "preact";
+import isFavorite from "../../utils/isFavorite";
+import toggleFavorite from "../../utils/toggleFavorite";
 
 export default class PedalDetail extends Component {
   constructor(props) {
     super(props);
 
-    fetch(`/api/pedal/${this.props.id}`).then(response => {
-      return response.json();
-    }).then(pedal => {
-      this.setState({
-        id: pedal.id,
-        manufacturer: pedal.manufacturer,
-        model: pedal.model,
-        type: pedal.type,
-        youtube: pedal.youtube,
-        copy: pedal.copy
-      });
+    this.setState({
+      id: null,
+      manufacturer: "",
+      model: "",
+      type: "",
+      youtube: "",
+      copy: "",
+      isFavorite: false
+    });
+
+    this.handleToggleFavorite = this.handleToggleFavorite.bind(this);
+  }
+
+  async componentDidMount() {
+    let response = await fetch(`/api/pedal/${this.props.id}`);
+    let pedal = await response.json();
+
+    this.setState({
+      id: pedal.id,
+      manufacturer: pedal.manufacturer,
+      model: pedal.model,
+      type: pedal.type,
+      youtube: `https://www.youtube.com/embed/${pedal.youtube}`,
+      copy: pedal.copy,
+      isFavorite: isFavorite(pedal.id)
+    });
+  }
+
+  handleToggleFavorite() {
+    toggleFavorite(this.state.id, this.state.manufacturer, this.state.model, this.state.type);
+
+    this.setState({
+      isFavorite: isFavorite(this.state.id)
     });
   }
 
   render() {
     return (
       <section>
-        <PedalHeading>
+        <Heading>
           <BackLink href="/">←</BackLink>
-          <PedalName>{this.state.manufacturer} {this.state.model}</PedalName>
-        </PedalHeading>
+          <h1>{this.state.manufacturer} {this.state.model}</h1>
+        </Heading>
         <PedalInfo>
           <PedalImageContainer>
-            <ToggleFavorite>+</ToggleFavorite>
-            <picture>
-              <source srcset={`/images/${this.state.id}-2x.webp 2x, /images/pedals/${this.state.id}-1x.webp 1x`} type="image/webp"/>
-              <source srcset={`/images/${this.state.id}-2x.jpg 2x, /images/pedals/${this.state.id}-1x.jpg 1x`} type="image/jpeg"/>
-              <PedalImage src={`/images/${this.state.id}-1x.jpg`} alt={`${this.state.manufacturer} ${this.state.model}`} />
-            </picture>
+            <ToggleFavorite onClick={this.handleToggleFavorite}>{this.state.isFavorite === true ? "-" : "+"}</ToggleFavorite>
+            <PedalImage id={this.state.id} manufacturer={this.state.manufacturer} model={this.state.model}/>
           </PedalImageContainer>
-          <PedalInfoHeading>Type</PedalInfoHeading>
-          <PedalCopy>{this.state.type}</PedalCopy>
-          <PedalInfoHeading>Description</PedalInfoHeading>
-          <PedalCopy>{this.state.copy}</PedalCopy>
-          <PedalInfoHeading>Demo Video</PedalInfoHeading>
-          <PedalVideo
+          <h2>Type</h2>
+          <p>{this.state.type}</p>
+          <h2>Description</h2>
+          <p>{this.state.copy}</p>
+          <h2>Demo Video</h2>
+          <iframe
             id="ytplayer"
             type="text/html"
             width="640"
             height="360"
-            src={`https://www.youtube.com/embed/${this.state.youtube}`}
+            src={this.state.youtube}
             frameborder="0">
-          </PedalVideo>
+          </iframe>
         </PedalInfo>
       </section>
     );

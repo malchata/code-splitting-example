@@ -1,11 +1,14 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { h, render, Component } from "preact";
-import { SearchLabel, SearchInputContainer, SearchInput, SearchSubmit, SortContainer, Sort, SortLabel, SortSelectContainer, SortSelect, Separator, PedalList, Pedal, PedalImage, PedalName, PedalType } from "./FilterablePedalList.css";
-import { simpleSort } from "../../utils/simpleSort";
+import { SearchLabel, SearchInputContainer, SearchInput, SearchSubmit, SortContainer, Sort, SortLabel, SortSelectContainer, SortSelect, Separator } from "./Search.css";
+import PedalList from "../PedalList/PedalList";
+import Pedal from "../Pedal/Pedal";
+import simpleSort from "../../utils/simpleSort";
 
-export default class FilterablePedalList extends Component {
+export default class Search extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       searchQuery: "",
       sortBy: "manufacturer",
@@ -19,39 +22,30 @@ export default class FilterablePedalList extends Component {
   }
 
   async getPedalData() {
-    let response = await fetch(`/api/search/${encodeURIComponent(this.state.searchQuery)}`);
+    if (this.state.searchQuery.length > 0) {
+      let response = await fetch(`/api/search/${encodeURIComponent(this.state.searchQuery)}`);
 
-    if (response.status === 200) {
-      let pedals = [];
-      let json = await response.json();
+      if (response.status === 200) {
+        let pedals = [];
+        let json = await response.json();
 
-      if (this.state.sortBy === "model") {
-        json = simpleSort(json, "model", this.state.sortOrder);
-      } else if (this.state.sortBy === "type") {
-        json = simpleSort(json, "type", this.state.sortOrder);
-      } else {
-        json = simpleSort(json, "manufacturer", this.state.sortOrder);
+        if (this.state.sortBy === "model") {
+          json = simpleSort(json, "model", this.state.sortOrder);
+        } else if (this.state.sortBy === "type") {
+          json = simpleSort(json, "type", this.state.sortOrder);
+        } else {
+          json = simpleSort(json, "manufacturer", this.state.sortOrder);
+        }
+
+        for (let entry in json) {
+          let pedal = json[entry];
+          pedals.push(<Pedal id={pedal.id} manufacturer={pedal.manufacturer} model={pedal.model} type={pedal.type}/>);
+        }
+
+        this.setState({
+          pedals: pedals
+        });
       }
-
-      for (let entry in json) {
-        let pedal = json[entry];
-
-        pedals.push(<Pedal>
-          <a href={`/pedal/${pedal.id}`}>
-            <picture>
-              <source srcset={`/images/${pedal.id}-2x.webp 2x, /images/pedals/${pedal.id}-1x.webp 1x`} type="image/webp"/>
-              <source srcset={`/images/${pedal.id}-2x.jpg 2x, /images/pedals/${pedal.id}-1x.jpg 1x`} type="image/jpeg"/>
-              <PedalImage src={`/images/${pedal.id}-1x.jpg`} alt={`${pedal.manufacturer} ${pedal.model}`} />
-            </picture>
-            <PedalName>{pedal.manufacturer} {pedal.model}</PedalName>
-            <PedalType><em>{pedal.type}</em></PedalType>
-          </a>
-        </Pedal>);
-      }
-
-      this.setState({
-        pedals: pedals
-      });
     }
   }
 
@@ -83,10 +77,9 @@ export default class FilterablePedalList extends Component {
   }
 
   render() {
-    let pedals = this.state.pedals;
-
     return (
       <section>
+        <a href="/favorites">View favorites</a>
         <form onSubmit={this.handleSubmit}>
           <SearchLabel for="query"><strong>STOMP</strong>LIST</SearchLabel>
           <SearchInputContainer>
@@ -117,8 +110,9 @@ export default class FilterablePedalList extends Component {
         </form>
         <Separator/>
         <PedalList>
-          {pedals.length > 0 ? pedals : "No pedals found!"}
+          {this.state.pedals}
         </PedalList>
+        <p style={`display: ${this.state.pedals.length > 0 ? "none" : "block"}`}>No pedals found... yet!</p>
       </section>
     );
   }

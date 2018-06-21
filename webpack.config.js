@@ -38,7 +38,7 @@ if (devMode === true) {
 module.exports = {
   mode: devMode === true ? "development" : "production",
   entry: {
-    app: devMode === true ? [path.join(paths.src, "index.js"), "webpack-hot-middleware/client"] : path.join(paths.src, "index.js")
+    main: devMode === true ? [path.join(paths.src, "index.js"), "webpack-hot-middleware/client"] : path.join(paths.src, "index.js")
   },
   devtool: devMode === true ? "inline-source-map" : "none",
   output: {

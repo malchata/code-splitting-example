@@ -1,18 +1,21 @@
+import regeneratorRuntime from "regenerator-runtime";
 import Router from "preact-router";
-import { h, render } from "preact";
-import FilterablePedalList from "./components/FilterablePedalList/FilterablePedalList";
+import { h, render, Component } from "preact";
+import Search from "./components/Search/Search";
 import PedalDetail from "./components/PedalDetail/PedalDetail";
+import Favorites from "./components/Favorites/Favorites";
 
-const appElement = document.getElementsByTagName("main")[0];
+const mainElement = document.getElementsByTagName("main")[0];
 
 const Main = () => (
   <Router>
-    <FilterablePedalList path="/" default/>
+    <Search path="/" default/>
     <PedalDetail path="/pedal/:id"/>
+    <Favorites path="/favorites"/>
   </Router>
 );
 
-render(<Main/>, appElement, appElement.lastChild);
+render(<Main/>, mainElement, mainElement.lastChild);
 
 if (module.hot) {
   module.hot.accept();

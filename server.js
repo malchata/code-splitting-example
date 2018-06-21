@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const webroot = path.join(__dirname, "dist");
-const pedals = require("./api/pedals.json").pedals;
+const pedals = require("./pedals.json").pedals;
 const devMode = process.env.NODE_ENV !== "production";
 
 if (devMode === true) {
@@ -22,7 +22,7 @@ if (devMode === true) {
 }
 
 app.listen(port, () => {
-  console.log("[" + devMode === true ? "development" : "production" + "] App up and running on http://localhost:" + port);
+  console.log("[" + (devMode === true ? "development" : "production") + "] App up and running on http://localhost:" + port);
 });
 
 app.get("/api/search/:query", (req, res) => {
