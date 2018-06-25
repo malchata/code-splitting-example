@@ -79,7 +79,6 @@ export default class Search extends Component {
   render() {
     return (
       <section>
-        <a href="/favorites">View favorites</a>
         <form onSubmit={this.handleSubmit}>
           <SearchLabel for="query"><strong>STOMP</strong>LIST</SearchLabel>
           <SearchInputContainer>
@@ -112,7 +111,7 @@ export default class Search extends Component {
         <PedalList>
           {this.state.pedals}
         </PedalList>
-        <p style={`display: ${this.state.pedals.length > 0 ? "none" : "block"}`}>No pedals found... yet!</p>
+        <p style={`display: ${this.state.pedals.length > 0 ? "none" : "block"}`}>No pedals found. Try a different search term, or check out <a href="/favorites">your favorite pedals list</a>!</p>
       </section>
     );
   }
