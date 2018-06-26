@@ -3,7 +3,6 @@ import { h, render, Component } from "preact";
 import { SearchLabel, SearchInputContainer, SearchInput, SearchSubmit, SortContainer, Sort, SortLabel, SortSelectContainer, SortSelect, Separator } from "./Search.css";
 import PedalList from "../PedalList/PedalList";
 import Pedal from "../Pedal/Pedal";
-import simpleSort from "../../utils/simpleSort";
 
 export default class Search extends Component {
   constructor(props) {
@@ -28,6 +27,7 @@ export default class Search extends Component {
       if (response.status === 200) {
         let pedals = [];
         let json = await response.json();
+        let simpleSort = await import(/* webpackChunkName: "simpleSort" */ "../../utils/simpleSort").default;
 
         if (this.state.sortBy === "model") {
           json = simpleSort(json, "model", this.state.sortOrder);

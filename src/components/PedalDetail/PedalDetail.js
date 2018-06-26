@@ -5,7 +5,6 @@ import PedalImage from "../PedalImage/PedalImage";
 import { PedalImageContainer, ToggleFavorite, PedalInfo } from "./PedalDetail.css";
 import { h, render, Component } from "preact";
 import isFavorite from "../../utils/isFavorite";
-import toggleFavorite from "../../utils/toggleFavorite";
 
 export default class PedalDetail extends Component {
   constructor(props) {
@@ -39,7 +38,8 @@ export default class PedalDetail extends Component {
     });
   }
 
-  handleToggleFavorite() {
+  async handleToggleFavorite() {
+    let toggleFavorite = await import(/* webpackChunkName: "toggleFavorite" */ "../../utils/toggleFavorite").default;
     toggleFavorite(this.state.id, this.state.manufacturer, this.state.model, this.state.type);
 
     this.setState({

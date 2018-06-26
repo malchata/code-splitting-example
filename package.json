@@ -38,6 +38,7 @@
     "express": "^4.16.3",
     "html-webpack-plugin": "^3.2.0",
     "preact": "^8.2.9",
+    "preact-async-route": "^2.2.0",
     "preact-emotion": "^9.2.4",
     "preact-router": "^2.6.1",
     "prop-types": "^15.6.2",
