@@ -36,11 +36,11 @@ if (devMode === true) {
 }
 
 module.exports = {
-  mode: devMode === true ? "development" : "production",
+  mode: devMode ? "development" : "production",
   entry: {
-    main: devMode === true ? [path.join(paths.src, "index.js"), "webpack-hot-middleware/client"] : path.join(paths.src, "index.js")
+    main: devMode ? [path.join(paths.src, "index.js"), "webpack-hot-middleware/client"] : path.join(paths.src, "index.js")
   },
-  devtool: devMode === true ? "inline-source-map" : "none",
+  devtool: devMode ? "inline-source-map" : "none",
   output: {
     filename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js",
     path: paths.dist,

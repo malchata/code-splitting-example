@@ -22,7 +22,7 @@ if (devMode === true) {
 }
 
 app.listen(port, () => {
-  console.log("[" + (devMode === true ? "development" : "production") + "] App up and running on http://localhost:" + port);
+  console.log("[" + (devMode ? "development" : "production") + "] App up and running on http://localhost:" + port);
 });
 
 app.get("/api/search/:query", (req, res) => {
