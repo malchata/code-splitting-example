@@ -3,7 +3,6 @@ import Heading from "../Heading/Heading";
 import BackLink from "../BackLink/BackLink";
 import PedalList from "../PedalList/PedalList";
 import Pedal from "../Pedal/Pedal";
-import toggleFavorite from "../../utils/toggleFavorite";
 
 export default class Favorites extends Component {
   constructor(props) {
