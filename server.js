@@ -5,7 +5,6 @@ const port = 8080;
 const webroot = path.join(__dirname, "dist");
 const images = path.join(__dirname, "src", "images");
 const pedals = require("./pedals.json").pedals;
-const devMode = process.env.NODE_ENV !== "production";
 
 app.use(express.static(webroot));
 app.use("/images", express.static(images));
