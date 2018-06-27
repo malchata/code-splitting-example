@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "NODE_ENV=production npx webpack",
-    "start": "NODE_ENV=production node server.js",
-    "dev": "NODE_ENV=development node server.js"
+    "start": "npm run build && NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development npx webpack"
   },
   "repository": {
     "type": "git",

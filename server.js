@@ -8,7 +8,7 @@ const pedals = require("./pedals.json").pedals;
 const devMode = process.env.NODE_ENV !== "production";
 
 app.use(express.static(webroot));
-app.use(express.static(images, "images"));
+app.use("/images", express.static(images));
 
 app.listen(port, () => {
   console.log("App up and running on http://localhost:" + port);
