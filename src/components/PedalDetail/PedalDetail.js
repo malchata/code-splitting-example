@@ -1,9 +1,10 @@
 import regeneratorRuntime from "regenerator-runtime";
+import { h, render, Component } from "preact";
 import Heading from "../Heading/Heading";
 import BackLink from "../BackLink/BackLink";
 import PedalImage from "../PedalImage/PedalImage";
 import { PedalImageContainer, ToggleFavorite, PedalInfo } from "./PedalDetail.css";
-import { h, render, Component } from "preact";
+import toggleFavorite from "../../utils/toggleFavorite";
 import isFavorite from "../../utils/isFavorite";
 
 export default class PedalDetail extends Component {
@@ -39,7 +40,6 @@ export default class PedalDetail extends Component {
   }
 
   async handleToggleFavorite() {
-    let toggleFavorite = await import(/* webpackChunkName: "toggleFavorite" */ "../../utils/toggleFavorite").default;
     toggleFavorite(this.state.id, this.state.manufacturer, this.state.model, this.state.type);
 
     this.setState({
