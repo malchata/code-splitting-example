@@ -8,27 +8,22 @@ const paths = {
   src: path.join(__dirname, "src"),
   dist: path.join(__dirname, "dist")
 };
-
-let plugins = [
-  new CleanWebpackPlugin(paths.dist),
-  new HtmlWebpackPlugin({
-    template: path.join(paths.src, "html", "app.html"),
-    filename: path.join(paths.dist, "index.html"),
-    inject: true,
-    hash: false,
-    minify: {
-      removeComments: devMode ? false : true,
-      collapseWhitespace: devMode ? false : true,
-      minifyJS: devMode ? false : true,
-      minifyCSS: devMode ? false : true
-    }
-  })
-];
+const htmlOptions = {
+  template: path.join(paths.src, "html", "app.html"),
+  minify: {
+    removeComments: devMode ? false : true,
+    collapseWhitespace: devMode ? false : true,
+    minifyJS: devMode ? false : true,
+    minifyCSS: devMode ? false : true
+  }
+}
 
 module.exports = {
   mode: devMode ? "development" : "production",
   entry: {
-    main: path.join(paths.src, "index.js")
+    main: path.join(paths.src, "index.js"),
+    detail: path.join(paths.src, "detail.js"),
+    favorites: path.join(paths.src, "favorites.js")
   },
   devtool: devMode ? "inline-source-map" : "none",
   output: {
@@ -47,5 +42,19 @@ module.exports = {
       }
     ]
   },
-  plugins: plugins
+  plugins: [
+    new CleanWebpackPlugin(paths.dist),
+    new HtmlWebpackPlugin(Object.assign({
+      filename: path.join(paths.dist, "index.html"),
+      excludeChunks: ["detail", "favorites"]
+    }, htmlOptions)),
+    new HtmlWebpackPlugin(Object.assign({
+      filename: path.join(paths.dist, "detail.html"),
+      excludeChunks: ["main", "favorites"]
+    }, htmlOptions)),
+    new HtmlWebpackPlugin(Object.assign({
+      filename: path.join(paths.dist, "favorites.html"),
+      excludeChunks: ["main", "detail"]
+    }, htmlOptions))
+  ]
 };

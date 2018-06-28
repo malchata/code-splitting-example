@@ -2,15 +2,18 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const port = 8080;
-const webroot = path.join(__dirname, "dist");
-const images = path.join(__dirname, "src", "images");
 const pedals = require("./pedals.json").pedals;
 
-app.use(express.static(webroot));
-app.use("/images", express.static(images));
+app.use(express.static(path.join(__dirname, "dist")));
+app.use("/images", express.static(path.join(__dirname, "src", "images")));
+app.use("/favorites", express.static(path.join(__dirname, "dist", "favorites.html")));
 
 app.listen(port, () => {
   console.log("App up and running on http://localhost:" + port);
+});
+
+app.get("/pedal/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "detail.html"));
 });
 
 app.get("/api/search/:query", (req, res) => {

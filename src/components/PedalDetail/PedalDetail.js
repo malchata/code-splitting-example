@@ -25,11 +25,23 @@ export default class PedalDetail extends Component {
   }
 
   async componentDidMount() {
-    let response = await fetch(`/api/pedal/${this.props.id}`);
+    let clean = {};
+    let id = document.location.href.split("/").pop();
+
+    if (/^\d+$/i.test(id) === true) {
+      clean.id = parseInt(id);
+    } else {
+      clean.id = 0;
+    }
+
+    this.setState({
+      id: clean.id
+    });
+
+    let response = await fetch(`/api/pedal/${this.state.id}`);
     let pedal = await response.json();
 
     this.setState({
-      id: pedal.id,
       manufacturer: pedal.manufacturer,
       model: pedal.model,
       type: pedal.type,
