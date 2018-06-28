@@ -3,26 +3,14 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const webroot = path.join(__dirname, "dist");
+const images = path.join(__dirname, "src", "images");
 const pedals = require("./pedals.json").pedals;
-const devMode = process.env.NODE_ENV !== "production";
 
-if (devMode === true) {
-  const webpack = require("webpack");
-  const webpackDevMiddleware = require("webpack-dev-middleware");
-  const webpackHotMiddleware = require("webpack-hot-middleware");
-  const config = require("./webpack.config.js");
-  const compiler = webpack(config);
-
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-  }));
-  app.use(webpackHotMiddleware(compiler));
-} else {
-  app.use(express.static(webroot));
-}
+app.use(express.static(webroot));
+app.use("/images", express.static(images));
 
 app.listen(port, () => {
-  console.log("[" + (devMode ? "development" : "production") + "] App up and running on http://localhost:" + port);
+  console.log("App up and running on http://localhost:" + port);
 });
 
 app.get("/api/search/:query", (req, res) => {

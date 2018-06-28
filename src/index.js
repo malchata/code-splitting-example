@@ -15,7 +15,3 @@ const Main = () => (
 );
 
 render(<Main/>, mainElement, mainElement.lastChild);
-
-if (module.hot) {
-  module.hot.accept();
-}
