@@ -25,7 +25,7 @@ module.exports = {
     detail: path.join(paths.src, "detail.js"),
     favorites: path.join(paths.src, "favorites.js")
   },
-  devtool: devMode ? "inline-source-map" : "none",
+  devtool: devMode ? "source-map" : "none",
   output: {
     filename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js",
     path: paths.dist,
