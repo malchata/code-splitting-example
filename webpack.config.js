@@ -25,7 +25,19 @@ module.exports = {
     detail: path.join(paths.src, "detail.js"),
     favorites: path.join(paths.src, "favorites.js")
   },
-  devtool: devMode ? "source-map" : "none",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/i,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  },
+  devtool: "source-map",
   output: {
     filename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js",
     path: paths.dist,
