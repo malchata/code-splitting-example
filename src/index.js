@@ -1,4 +1,3 @@
-import regeneratorRuntime from "regenerator-runtime";
 import Router from "preact-router";
 import { h, render, Component } from "preact";
 import Search from "./components/Search/Search";
