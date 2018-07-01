@@ -4,18 +4,8 @@ import AsyncRoute from "preact-async-route";
 import { h, render, Component } from "preact";
 import Search from "./components/Search/Search";
 
-const mainElement = document.getElementsByTagName("main")[0];
-
-const Main = () => (
-  <Router>
-    <Search path="/" default/>
-    <AsyncRoute path="/pedal/:id" getComponent={() => import("./components/PedalDetail/PedalDetail").then(module => module.default)}/>
-    <AsyncRoute path="/favorites" getComponent={() => import("./components/Favorites/Favorites").then(module => module.default)}/>
-  </Router>
-);
-
-render(<Main/>, mainElement, mainElement.lastChild);
-
-if (module.hot) {
-  module.hot.accept();
-}
+render(<Router>
+  <Search path="/" default/>
+  <AsyncRoute path="/pedal/:id" getComponent={() => import("./components/PedalDetail/PedalDetail").then(module => module.default)}/>
+  <AsyncRoute path="/favorites" getComponent={() => import("./components/Favorites/Favorites").then(module => module.default)}/>
+</Router>, document.getElementsByTagName("main")[0]);
