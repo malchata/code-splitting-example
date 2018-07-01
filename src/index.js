@@ -8,4 +8,4 @@ render(<Router>
   <Search path="/" default/>
   <AsyncRoute path="/pedal/:id" getComponent={() => import("./components/PedalDetail/PedalDetail").then(module => module.default)}/>
   <AsyncRoute path="/favorites" getComponent={() => import("./components/Favorites/Favorites").then(module => module.default)}/>
-</Router>, document.getElementsByTagName("main")[0]);
+</Router>, document.getElementById("app"));
