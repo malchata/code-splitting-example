@@ -30,12 +30,23 @@ module.exports = {
   entry: {
     main: path.join(paths.src, "index.js")
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/i,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  },
   devtool: devMode ? "inline-source-map" : "none",
   output: {
     filename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js",
     path: paths.dist,
-    publicPath: "/",
-    chunkFilename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js"
+    publicPath: "/"
   },
   module: {
     rules: [
