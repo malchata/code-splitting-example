@@ -90,5 +90,14 @@
   </head>
   <body>
     <main id="app"></main>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").then(function(e) {
+          console.log("Service worker registration succeeded.");
+        }).catch(function(error) {
+          console.warn("Service worker registration failed: " + error);
+        });
+      }
+    </script>
   </body>
 </html>
