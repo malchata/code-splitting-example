@@ -1,4 +1,3 @@
-import regeneratorRuntime from "regenerator-runtime";
 import Router from "preact-router";
 import AsyncRoute from "preact-async-route";
 import { h, render, Component } from "preact";
