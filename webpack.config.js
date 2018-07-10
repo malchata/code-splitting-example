@@ -25,9 +25,12 @@ module.exports = {
           chunks: "all"
         }
       }
+    },
+    runtimeChunk: {
+      name: "vendors"
     }
   },
-  devtool: devMode ? "source-map" : "none",
+  devtool: "source-map",
   output: {
     filename: devMode ? "js/[name].js" : "js/[name].[chunkhash:8].js",
     path: paths.dist,
