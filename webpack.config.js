@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require("webpack");;
+const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const devMode = process.env.NODE_ENV !== "production";
@@ -25,7 +25,7 @@ module.exports = {
       }
     },
     runtimeChunk: {
-        name: "vendors"
+      name: "vendors"
     }
   },
   devtool: "source-map",
