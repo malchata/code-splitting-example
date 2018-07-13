@@ -39,7 +39,7 @@ export default class PedalDetail extends Component {
   }
 
   async handleToggleFavorite() {
-    let module = await import(/* webpackChunkName: "toggleFavorite" */ "../../utils/toggleFavorite");
+    let module = await import(/* webpackPrefetch: true, webpackChunkName: "toggleFavorite" */ "../../utils/toggleFavorite");
     let toggleFavorite = module.default;
     toggleFavorite(this.state.id, this.state.manufacturer, this.state.model, this.state.type);
 

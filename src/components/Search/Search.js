@@ -27,7 +27,7 @@ export default class Search extends Component {
       if (response.status === 200) {
         let pedals = [];
         let json = await response.json();
-        let module = await import(/* webpackChunkName: "simpleSort" */ "../../utils/simpleSort");
+        let module = await import(/* webpackPrefetch: true, webpackChunkName: "simpleSort" */ "../../utils/simpleSort");
         let simpleSort = module.default;
 
         if (this.state.sortBy === "model") {
