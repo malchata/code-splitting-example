@@ -4,9 +4,8 @@
   "description": "A toy app demonstrating how to do code splitting in Webpack.",
   "main": "server.js",
   "scripts": {
-    "build": "npm rum rmcache && NODE_ENV=production npx parcel build ./src/index.html",
-    "start": "npm run build && node server.js",
-    "rmcache": "rm -rf ./.cache"
+    "build": "NODE_ENV=production npx parcel build ./src/index.html --no-cache",
+    "start": "npm run build && node server.js"
   },
   "repository": {
     "type": "git",
