@@ -50,8 +50,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.src, "html", "app.html"),
       filename: path.join(paths.dist, "index.html"),
-      inject: true,
-      hash: false,
       minify: {
         removeComments: devMode ? false : true,
         collapseWhitespace: devMode ? false : true,
