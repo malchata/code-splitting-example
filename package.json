@@ -40,6 +40,7 @@
     "preact-async-route": "^2.2.0",
     "preact-emotion": "^9.2.5",
     "preact-router": "^2.6.1",
+    "preload-webpack-plugin": "^3.0.0-beta.1",
     "prop-types": "^15.6.2",
     "regenerator-runtime": "^0.12.0",
     "webpack": "^4.12.1",

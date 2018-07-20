@@ -6,11 +6,6 @@
     <title>
       Stomplist
     </title>
-    <% for(chunk in htmlWebpackPlugin.files.js){ %>
-      <% if(htmlWebpackPlugin.files.js[chunk].indexOf("vendors") !== -1 || htmlWebpackPlugin.files.js[chunk].indexOf("main") !== -1){ %>
-        <link rel="preload" as="script" href="<%= htmlWebpackPlugin.files.js[chunk] %>">
-      <% } %>
-    <% } %>
     <script>document.documentElement.classList.remove("no-js")</script>
     <style>
       html,
