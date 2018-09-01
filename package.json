@@ -25,35 +25,34 @@
   },
   "homepage": "https://github.com/malchata/code-splitting-example#readme",
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-emotion": "^9.2.6",
+    "babel-loader": "^8.0.1",
+    "babel-plugin-emotion": "^9.2.8",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
-    "emotion": "^9.2.6",
+    "emotion": "^9.2.8",
     "express": "^4.16.3",
     "html-webpack-plugin": "^3.2.0",
-    "preact": "^8.2.9",
+    "preact": "^8.3.1",
     "preact-async-route": "^2.2.1",
-    "preact-emotion": "^9.2.6",
+    "preact-emotion": "^9.2.8",
     "preact-router": "^2.6.1",
     "prop-types": "^15.6.2",
-    "regenerator-runtime": "^0.12.0",
-    "webpack": "^4.16.1",
+    "regenerator-runtime": "^0.12.1",
+    "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   },
   "babel": {
     "presets": [
       [
-        "env",
+        "@babel/preset-env",
         {
           "targets": {
             "browsers": [
-              "last 2 versions",
-              "safari >= 9"
+              "last 2 versions"
             ]
           },
           "modules": false
