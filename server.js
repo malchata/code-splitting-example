@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const port = 8080;
+const port = 8081; // Change this back before commit
 const pedals = require("./pedals.json").pedals;
 
 app.use(express.static(path.join(__dirname, "dist")));
