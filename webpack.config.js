@@ -16,17 +16,20 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: "all",
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/i,
-          name: "vendors",
           chunks: "all"
+        },
+        commons: {
+          name: "commons",
+          chunks: "initial",
+          minChunks: 2
         }
       }
     },
     runtimeChunk: {
-      name: "vendors"
+      name: "runtime"
     }
   },
   devtool: "source-map",
